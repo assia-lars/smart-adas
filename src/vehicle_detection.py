@@ -12,9 +12,7 @@ OUTPUT_PATH = BASE_DIR / "results" / "vehicle_detection.jpg"
 # Load YOLO11n model
 model = YOLO(str(MODEL_PATH))
 
-# Classes to detect (COCO dataset)
-# 0: person, 1: bicycle, 2: car
-# 3: motorcycle, 5: bus, 7: truck
+# Classes to detect
 vehicle_classes = [0, 1, 2, 3, 5, 7]
 
 # Run detection using NVIDIA GPU
@@ -27,8 +25,10 @@ results = model.predict(
     verbose=False
 )
 
-# Draw bounding boxes
+# Get detection result
 result = results[0]
+
+# Draw bounding boxes
 annotated_image = result.plot()
 
 # Save result
@@ -47,3 +47,17 @@ for box in result.boxes:
 
 print(f"\nTotal detections: {len(result.boxes)}")
 print(f"Saved image: {OUTPUT_PATH}")
+
+# Display image
+cv2.imshow("Smart ADAS - Vehicle Detection", annotated_image)
+
+print("\nPress Q or ESC to close the window.")
+
+while True:
+    key = cv2.waitKey(100) & 0xFF
+
+    if key == ord('q') or key == 27:
+        break
+
+cv2.destroyAllWindows()
+
