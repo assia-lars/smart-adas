@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+.env
+data/videos/
+data/images/
+results/
+runs/
+*.pt
+.ipynb_checkpoints/
